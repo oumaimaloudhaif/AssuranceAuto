@@ -3,6 +3,7 @@ package com.example.AssuranceAuto.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
@@ -20,10 +21,12 @@ public class Auto {
     private String registrationNumber;
     private String model;
     @ManyToOne
-    @JoinColumn(name = "assurance_id")
+    @JoinColumn(name = "assurance_Id")
     private Assurance assurance;
     // This annotation of Data JPA allows to insert the Date of creation of the data
     @CreatedDate
     private Date created;
     // This annotation of Data JPA allows to insert the last Date of modification of the data
+    @LastModifiedDate
+    private Date updated;
 }
