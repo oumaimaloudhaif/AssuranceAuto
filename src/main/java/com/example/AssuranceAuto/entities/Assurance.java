@@ -1,7 +1,7 @@
 package com.example.AssuranceAuto.entities;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -23,7 +23,7 @@ public class Assurance {
     private String assuranceNumber;
     @OneToMany(mappedBy = "assurance")
     @JsonIgnore
-    private ArrayList<Auto> autos;
+    private List<Auto> autos;
     // This annotation of Data JPA allows to insert the Date of creation of the data
     @CreatedDate private Date created;
     // This annotation of Data JPA allows to insert the last Date of modification of the data
