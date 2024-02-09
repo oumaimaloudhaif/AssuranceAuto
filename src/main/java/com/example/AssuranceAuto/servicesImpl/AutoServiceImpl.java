@@ -1,7 +1,7 @@
 package com.example.AssuranceAuto.servicesImpl;
 
 import com.example.AssuranceAuto.dtos.AutoDTO;
-import com.example.AssuranceAuto.dtos.mappers.FromDoToDTO;
+import com.example.AssuranceAuto.dtos.mappers.FromDOToDTO;
 import com.example.AssuranceAuto.entities.Auto;
 import com.example.AssuranceAuto.repositories.AutoRepository;
 import com.example.AssuranceAuto.services.AutoService;
@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class AutoServiceImpl implements AutoService {
     @Autowired private AutoRepository autoRepository;
-    @Autowired private FromDoToDTO fromDoToDTO;
+    @Autowired private FromDOToDTO fromDoToDTO;
     public AutoDTO addAuto(Auto auto){
         final Auto savedAuto = autoRepository.save(auto);
         return fromDoToDTO.MapAuto(savedAuto);

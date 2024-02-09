@@ -7,7 +7,7 @@ import com.example.AssuranceAuto.entities.Auto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FromDoToDTO {
+public class FromDOToDTO {
     public AutoDTO MapAuto(Auto auto) {
         AutoDTO autoDTO = new AutoDTO();
         autoDTO.setModel(auto.getModel());
