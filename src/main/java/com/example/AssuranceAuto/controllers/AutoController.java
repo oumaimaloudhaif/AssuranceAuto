@@ -7,33 +7,38 @@ import com.example.AssuranceAuto.dtos.AutoDTO;
 import com.example.AssuranceAuto.entities.Auto;
 import com.example.AssuranceAuto.servicesImpl.AutoServiceImpl;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-/*** Auto Controller ***/
+/** Auto Controller */
 @Validated
 @RestController
 public class AutoController {
-    @Autowired AutoServiceImpl autoServiceImpl;
-    @Autowired AutoMapper autoMapper;
-    @GetMapping("/autos")
-    public AutoResponse getAutos(@RequestBody (required = false) AutoRequest autoRequest){
-        List<AutoDTO> autoDTOS;
-        if(autoRequest!=null && !(autoRequest.getKeyword().isBlank()))
-            autoDTOS=autoServiceImpl.searchRegistrationNumber(autoRequest.getKeyword());
-        else
-            autoDTOS=autoServiceImpl.getAllAutos();
-        return autoMapper.fromAutoDTOToAuto(autoDTOS);
-    }
-    @PostMapping("/autos")
-    public AutoDTO addAuto(@RequestBody @Valid Auto auto){
-        return autoServiceImpl.addAuto(auto);
-    }
-    @PutMapping("/autos")
-    public AutoDTO updateAuto(@RequestBody @Valid Auto auto){
-        return autoServiceImpl.updateAuto(auto);
-    }
+  @Autowired AutoServiceImpl autoServiceImpl;
+  @Autowired AutoMapper autoMapper;
+
+  @GetMapping("/autos")
+  public AutoResponse getAutos(@RequestBody(required = false) @Valid AutoRequest autoRequest) {
+    List<AutoDTO> autoDTOS;
+    if (autoRequest != null && !(autoRequest.getKeyword().isBlank()))
+      autoDTOS = autoServiceImpl.searchRegistrationNumber(autoRequest.getKeyword());
+    else autoDTOS = autoServiceImpl.getAllAutos();
+    return autoMapper.fromAutoDTOToAuto(autoDTOS);
+  }
+
+  @PostMapping("/autos")
+  public AutoDTO addAuto(@RequestBody @Valid Auto auto) {
+    return autoServiceImpl.addAuto(auto);
+  }
+
+  @PutMapping("/autos")
+  public AutoDTO updateAuto(@RequestBody @Valid Auto auto) {
+    return autoServiceImpl.updateAuto(auto);
+  }
 }
