@@ -1,14 +1,17 @@
 package com.example.AssuranceAuto.controllers.responses;
 
 import com.example.AssuranceAuto.dtos.AssuranceDTO;
-import lombok.*;
-
 import java.util.List;
-/*** Assurance Response  ***/
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+/** Assurance Response */
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class AssuranceResponse {
-    List<AssuranceDTO> result;
+  List<AssuranceDTO> result;
 }
