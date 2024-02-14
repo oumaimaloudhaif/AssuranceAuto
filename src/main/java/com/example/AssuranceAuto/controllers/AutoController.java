@@ -10,12 +10,12 @@ import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
 /** Auto Controller */
 @Validated
 @RestController
@@ -24,11 +24,18 @@ public class AutoController {
   @Autowired AutoMapper autoMapper;
 
   @GetMapping("/autos")
-  public AutoResponse getAutos(@RequestBody(required = false) @Valid AutoRequest autoRequest) {
+  public AutoResponse getAutos(
+      @RequestParam(required = false) @Valid String keyword,
+      @RequestBody(required = false) @Valid AutoRequest autoRequest) {
     List<AutoDTO> autoDTOS;
-    if (autoRequest != null && !(autoRequest.getKeyword().isBlank()))
-      autoDTOS = autoServiceImpl.searchRegistrationNumber(autoRequest.getKeyword());
-    else autoDTOS = autoServiceImpl.getAllAutos();
+    if (keyword != null) {
+      autoDTOS = autoServiceImpl.searchAutoByModel(keyword);
+    }
+    else{
+      if (autoRequest != null && !(autoRequest.getKeyword().isBlank()))
+        autoDTOS = autoServiceImpl.searchRegistrationNumber(autoRequest.getKeyword());
+      else autoDTOS = autoServiceImpl.getAllAutos();
+    }
     return autoMapper.fromAutoDTOToAuto(autoDTOS);
   }
 
