@@ -27,8 +27,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 /** Assurance Controller Test */
 public class AssuranceControllerTest extends AbstractTest {
 
-  @MockBean AssuranceServiceImpl assuranceService;
-  @Autowired private ObjectMapper objectMapper;
+  @MockBean
+  AssuranceServiceImpl assuranceService;
+  @Autowired
+  private ObjectMapper objectMapper;
 
   @Override
   @BeforeEach
@@ -69,15 +71,11 @@ public class AssuranceControllerTest extends AbstractTest {
     mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(status().isInternalServerError())
         .andExpect(
-            result -> {
-              assertInstanceOf(InternalException.class, result.getResolvedException());
-            })
+            result -> assertInstanceOf(InternalException.class, result.getResolvedException()))
         .andExpect(
-            result -> {
-              assertEquals(
-                  "Internal exception",
-                  Objects.requireNonNull(result.getResolvedException()).getMessage());
-            });
+            result -> assertEquals(
+                "Internal exception",
+                Objects.requireNonNull(result.getResolvedException()).getMessage()));
   }
 
   @Test
@@ -148,10 +146,8 @@ public class AssuranceControllerTest extends AbstractTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(companyRequest.getKeyword())))
         .andExpect(
-            result -> {
-              assertInstanceOf(
-                  MethodArgumentNotValidException.class, result.getResolvedException());
-            })
+            result -> assertInstanceOf(
+                MethodArgumentNotValidException.class, result.getResolvedException()))
         .andExpect(status().isBadRequest());
   }
 
@@ -208,4 +204,5 @@ public class AssuranceControllerTest extends AbstractTest {
     AssuranceDTO result = objectMapper.readValue(content, AssuranceDTO.class);
     assertEquals(assuranceDTO.getAssuranceNumber(), result.getAssuranceNumber());
   }
+
 }
