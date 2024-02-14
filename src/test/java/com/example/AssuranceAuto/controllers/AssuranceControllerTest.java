@@ -27,8 +27,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 /** Assurance Controller Test */
 public class AssuranceControllerTest extends AbstractTest {
 
-  @MockBean AssuranceServiceImpl assuranceService;
-  @Autowired private ObjectMapper objectMapper;
+  @MockBean
+  AssuranceServiceImpl assuranceService;
+  @Autowired
+  private ObjectMapper objectMapper;
 
   @Override
   @BeforeEach
@@ -202,4 +204,5 @@ public class AssuranceControllerTest extends AbstractTest {
     AssuranceDTO result = objectMapper.readValue(content, AssuranceDTO.class);
     assertEquals(assuranceDTO.getAssuranceNumber(), result.getAssuranceNumber());
   }
+
 }
