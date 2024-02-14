@@ -44,3 +44,11 @@ You can format the project using the plugin :
 ## Swagger
 
 The API is documented using [Swagger](https://swagger.io/).
+
+## Health Check
+
+To check if the service is up, we enable to a GET call to our service via the health check Controller.
+Please execute the following command to the check the status of the app ```` curl localhost:8080/healthCheck````
+
+If we receive the msg  ```` AssuranceAuto  ```` then the app is ready to be consulted.
+If no msg is received, then a problem has occurred.
