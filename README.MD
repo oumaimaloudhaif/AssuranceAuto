@@ -40,3 +40,7 @@ You can format the project using the plugin :
       </executions>
 </plugin>   
 ````
+
+## Swagger
+
+The API is documented using [Swagger](https://swagger.io/).
