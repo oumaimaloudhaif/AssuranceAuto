@@ -10,9 +10,11 @@ import com.example.AssuranceAuto.controllers.requests.AssuranceRequest;
 import com.example.AssuranceAuto.controllers.responses.AssuranceResponse;
 import com.example.AssuranceAuto.dtos.AssuranceDTO;
 import com.example.AssuranceAuto.entities.Assurance;
+import com.example.AssuranceAuto.exceptions.InternalException;
 import com.example.AssuranceAuto.servicesImpl.AssuranceServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
+import java.util.Objects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +56,28 @@ public class AssuranceControllerTest extends AbstractTest {
     String content = mvcResult.getResponse().getContentAsString();
     AssuranceResponse assurances = super.mapFromJson(content, AssuranceResponse.class);
     assertEquals(2, assurances.getResult().size());
+  }
+
+  @Test
+  public void getAllAssurancesTestThenThrowInternalException() throws Exception {
+    // Given
+    final String uri = "/assurances";
+
+    // When
+    when(assuranceService.getAllAssurances())
+        .thenThrow(new InternalException("Internal exception"));
+    mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON_VALUE))
+        .andExpect(status().isInternalServerError())
+        .andExpect(
+            result -> {
+              assertInstanceOf(InternalException.class, result.getResolvedException());
+            })
+        .andExpect(
+            result -> {
+              assertEquals(
+                  "Internal exception",
+                  Objects.requireNonNull(result.getResolvedException()).getMessage());
+            });
   }
 
   @Test
