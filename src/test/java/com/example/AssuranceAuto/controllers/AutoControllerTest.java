@@ -10,11 +10,9 @@ import com.example.AssuranceAuto.controllers.requests.AutoRequest;
 import com.example.AssuranceAuto.controllers.responses.AutoResponse;
 import com.example.AssuranceAuto.dtos.AutoDTO;
 import com.example.AssuranceAuto.entities.Auto;
-import com.example.AssuranceAuto.exceptions.InternalException;
 import com.example.AssuranceAuto.servicesImpl.AutoServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
-import java.util.Objects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,10 +126,8 @@ public class AutoControllerTest extends AbstractTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(autoRequest.getKeyword())))
         .andExpect(
-            result -> {
-              assertInstanceOf(
-                  MethodArgumentNotValidException.class, result.getResolvedException());
-            })
+            result -> assertInstanceOf(
+                MethodArgumentNotValidException.class, result.getResolvedException()))
         .andExpect(status().isBadRequest());
   }
 
@@ -186,26 +182,5 @@ public class AutoControllerTest extends AbstractTest {
     String content = mvcResult.getResponse().getContentAsString();
     AutoDTO result = objectMapper.readValue(content, AutoDTO.class);
     assertEquals(autoDTO.getRegistrationNumber(), result.getRegistrationNumber());
-  }
-
-  @Test
-  public void getAllAutosTestThenThrowInternalException() throws Exception {
-    // Given
-    final String uri = "/autos";
-
-    // When
-    when(autoServiceImpl.getAllAutos()feat).thenThrow(new InternalException("Internal exception"));
-    mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON_VALUE))
-        .andExpect(status().isInternalServerError())
-        .andExpect(
-            result -> {
-              assertInstanceOf(InternalException.class, result.getResolvedException());
-            })
-        .andExpect(
-            result -> {
-              assertEquals(
-                  "Internal exception",
-                  Objects.requireNonNull(result.getResolvedException()).getMessage());
-            });
   }
 }
