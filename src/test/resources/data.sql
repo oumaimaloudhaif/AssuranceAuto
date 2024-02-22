@@ -1,3 +1,4 @@
+-- Insert initial data into Assurance table
 INSERT INTO assurance (assurance_number, created, updated)
 VALUES ('Assurance1', NOW(), NOW()),
        ('Assurance2', NOW(), NOW());

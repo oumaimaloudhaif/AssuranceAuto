@@ -1,3 +1,4 @@
+-- Assurance Auto table
 CREATE TABLE IF NOT EXISTS assurance (
                                          assurance_id BIGINT NOT NULL AUTO_INCREMENT,
                                          assurance_number VARCHAR(255),
