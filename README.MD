@@ -52,3 +52,8 @@ Please execute the following command to the check the status of the app ```` cur
 
 If we receive the msg  ```` AssuranceAuto  ```` then the app is ready to be consulted.
 If no msg is received, then a problem has occurred.
+
+## Environment Configuration
+To configure your environment and access the database in your project, you need to create a .env in the root directory of your project.
+Inside the .env file, define the necessary environment variables required for accessing the database. These include database connection details such database url, username and password.
+Then, your environment will be configured to access the database using the provided environment variables.
