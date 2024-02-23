@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /** From DTO To DO */
 @Component
 public class FromDTOToDO {
-  public Auto MapAutoDTO(AutoDTO autoDto) {
+  public Auto mapAutoDTO(AutoDTO autoDto) {
     Auto auto = new Auto();
     auto.setModel(autoDto.getModel());
     auto.setRegistrationNumber(autoDto.getRegistrationNumber());
@@ -17,7 +17,7 @@ public class FromDTOToDO {
     return auto;
   }
 
-  public Assurance MapAssuranceDTO(AssuranceDTO assuranceDTO) {
+  public Assurance mapAssuranceDTO(AssuranceDTO assuranceDTO) {
     Assurance assurance = new Assurance();
     assurance.setAssuranceNumber(assuranceDTO.getAssuranceNumber());
 
