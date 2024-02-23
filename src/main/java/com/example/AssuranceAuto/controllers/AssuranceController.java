@@ -10,11 +10,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /** Assurance Controller */
 @Validated
@@ -47,5 +43,16 @@ public class AssuranceController {
   public AssuranceDTO updateAssurance(@RequestBody @Valid Assurance assurance) {
 
     return assuranceServiceImpl.updateAssurance(assurance);
+  }
+  @GetMapping("/assurances/{id}")
+  public AssuranceDTO findAutoById(@PathVariable Long autoId) {
+
+    return assuranceServiceImpl.getAssuranceById(autoId);
+  }
+
+  @DeleteMapping("/assurances/{id}")
+  public boolean deleteAuto(@PathVariable Long id) {
+
+    return assuranceServiceImpl.deleteAssuranceById(id);
   }
 }

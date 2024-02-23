@@ -7,11 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HealthCheckController {
-    @Autowired
-    private ServiceConfig serviceConfig;
+  @Autowired private ServiceConfig serviceConfig;
 
-    @GetMapping("/healthCheck")
-    public String getHealthCheckMsg() {
-        return serviceConfig.getProjectName();
-    }
+  @GetMapping("/healthCheck")
+  public String getHealthCheckMsg() {
+    return serviceConfig.getProjectName();
+  }
 }
