@@ -15,4 +15,7 @@ public interface AutoService {
   List<AutoDTO> searchAutoByModel(String model);
 
   List<AutoDTO> searchRegistrationNumber(String registrationNumber);
+  AutoDTO getAutoById(Long autoId);
+
+  boolean deleteAutoById(Long autoId);
 }

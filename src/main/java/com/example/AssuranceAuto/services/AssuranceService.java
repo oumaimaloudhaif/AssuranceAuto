@@ -13,4 +13,7 @@ public interface AssuranceService {
   List<AssuranceDTO> getAllAssurances();
 
   List<AssuranceDTO> searchAssuranceByAssuranceNumber(String assuranceNumber);
-}
+  AssuranceDTO getAssuranceById(Long assuranceId) ;
+  boolean deleteAssuranceById(Long assuranceId);
+
+  }
