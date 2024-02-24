@@ -1,4 +1,4 @@
--- Assurance Auto table
+-- Create Assurance table
 CREATE TABLE IF NOT EXISTS assurance (
                                          assurance_id BIGINT NOT NULL AUTO_INCREMENT,
                                          assurance_number VARCHAR(255),
@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS assurance (
 -- Create Auto table
 CREATE TABLE IF NOT EXISTS auto (auto_id BIGINT NOT NULL AUTO_INCREMENT, assurance_id BIGINT,
     model VARCHAR(255),
+    registration_number VARCHAR(255),
     created DATETIME,
     updated DATETIME,
     PRIMARY KEY (auto_id),
