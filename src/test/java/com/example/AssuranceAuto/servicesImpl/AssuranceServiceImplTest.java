@@ -47,7 +47,7 @@ public class AssuranceServiceImplTest {
 
     // When
     when(assuranceRepository.save(assurance)).thenReturn(assurance);
-    when(fromDoToDTO.MapAssurance(assurance)).thenReturn(assuranceDTO);
+    when(fromDoToDTO.mapAssurance(assurance)).thenReturn(assuranceDTO);
     final AssuranceDTO expectedAssurance = assuranceService.addAssurance(assurance);
 
     // Then
@@ -62,7 +62,7 @@ public class AssuranceServiceImplTest {
 
     // When
     when(assuranceRepository.save(assurance)).thenReturn(assurance);
-    when(fromDoToDTO.MapAssurance(assurance)).thenReturn(assuranceDTO);
+    when(fromDoToDTO.mapAssurance(assurance)).thenReturn(assuranceDTO);
     final AssuranceDTO expectedAssurance = assuranceService.updateAssurance(assurance);
 
     // Then
@@ -80,8 +80,8 @@ public class AssuranceServiceImplTest {
 
     // When
     when(assuranceRepository.findAll()).thenReturn(assuranceListMock);
-    when(fromDoToDTO.MapAssurance(assurance)).thenReturn(assuranceDTO);
-    when(fromDoToDTO.MapAssurance(assurance1)).thenReturn(assuranceDTO1);
+    when(fromDoToDTO.mapAssurance(assurance)).thenReturn(assuranceDTO);
+    when(fromDoToDTO.mapAssurance(assurance1)).thenReturn(assuranceDTO1);
     final List<AssuranceDTO> expectedAssuranceList = assuranceService.getAllAssurances();
 
     // Then
@@ -100,8 +100,8 @@ public class AssuranceServiceImplTest {
 
     // When
     when(assuranceRepository.findByAssuranceNumber(keyword)).thenReturn(mockedAssurances);
-    when(fromDoToDTO.MapAssurance(assurance1)).thenReturn(assuranceDTO1);
-    when(fromDoToDTO.MapAssurance(assurance2)).thenReturn(assuranceDTO2);
+    when(fromDoToDTO.mapAssurance(assurance1)).thenReturn(assuranceDTO1);
+    when(fromDoToDTO.mapAssurance(assurance2)).thenReturn(assuranceDTO2);
     final List<AssuranceDTO> assuranceDTOS =
         assuranceService.searchAssuranceByAssuranceNumber(keyword);
 

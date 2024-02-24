@@ -30,7 +30,7 @@ public class FromDOToDTOTest {
   public void testMapAssurance() {
     final Assurance assurance = new Assurance(1L, "123", List.of(), new Date(), new Date());
 
-    final AssuranceDTO result = fromDoToDTO.MapAssurance(assurance);
+    final AssuranceDTO result = fromDoToDTO.mapAssurance(assurance);
 
     assertEquals("123", result.getAssuranceNumber());
   }
@@ -41,7 +41,7 @@ public class FromDOToDTOTest {
 
     final Auto auto = new Auto(1L, "123", "KIA", assurance, new Date(), new Date());
 
-    final AutoDTO result = fromDoToDTO.MapAuto(auto);
+    final AutoDTO result = fromDoToDTO.mapAuto(auto);
 
     assertEquals("KIA", result.getModel());
     assertEquals("123", result.getRegistrationNumber());
