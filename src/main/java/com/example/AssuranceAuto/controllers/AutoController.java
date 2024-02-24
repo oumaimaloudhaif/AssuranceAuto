@@ -51,13 +51,13 @@ public class AutoController {
     return autoServiceImpl.updateAuto(auto);
   }
   @GetMapping("/autos/{id}")
-  public AutoDTO findAutoById(@PathVariable Long autoId) {
+  public AutoDTO findAutoById(@PathVariable("id") Long autoId) {
 
     return autoServiceImpl.getAutoById(autoId);
   }
 
   @DeleteMapping("/autos/{id}")
-  public boolean deleteAuto(@PathVariable Long id) {
+  public boolean deleteAuto(@PathVariable("id") Long id) {
 
     return autoServiceImpl.deleteAutoById(id);
   }

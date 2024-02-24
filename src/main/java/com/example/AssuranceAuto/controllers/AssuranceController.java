@@ -50,13 +50,13 @@ public class AssuranceController {
     return assuranceServiceImpl.updateAssurance(assurance);
   }
   @GetMapping("/assurances/{id}")
-  public AssuranceDTO findAutoById(@PathVariable Long autoId) {
+  public AssuranceDTO findAutoById(@PathVariable("id") Long autoId) {
 
     return assuranceServiceImpl.getAssuranceById(autoId);
   }
 
   @DeleteMapping("/assurances/{id}")
-  public boolean deleteAuto(@PathVariable Long id) {
+  public boolean deleteAuto(@PathVariable("id") Long id) {
 
     return assuranceServiceImpl.deleteAssuranceById(id);
   }
