@@ -10,13 +10,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.*;
 
 /** Assurance Controller */
 @Validated
@@ -25,6 +19,7 @@ public class AssuranceController {
   @Autowired AssuranceServiceImpl assuranceServiceImpl;
   @Autowired AssuranceMapper assuranceMapper;
 
+  @CrossOrigin("*")
   @GetMapping("/assurances")
   public AssuranceResponse getAssurances(
       @RequestBody(required = false) @Valid AssuranceRequest assuranceRequest) {
@@ -38,6 +33,7 @@ public class AssuranceController {
     return assuranceMapper.fromAssuranceDTOToAssurance(assuranceDTOS);
   }
 
+  @CrossOrigin("*")
   @PostMapping("/assurances")
   public AssuranceDTO addAssurance(@RequestBody @Valid Assurance assurance) {
 
@@ -49,12 +45,14 @@ public class AssuranceController {
 
     return assuranceServiceImpl.updateAssurance(assurance);
   }
+  @CrossOrigin("*")
   @GetMapping("/assurances/{id}")
   public AssuranceDTO findAutoById(@PathVariable("id") Long autoId) {
 
     return assuranceServiceImpl.getAssuranceById(autoId);
   }
 
+  @CrossOrigin("*")
   @DeleteMapping("/assurances/{id}")
   public boolean deleteAuto(@PathVariable("id") Long id) {
 
