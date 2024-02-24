@@ -47,7 +47,7 @@ public class AutoServiceImplTest {
 
     // When
     when(autoRepository.save(auto)).thenReturn(auto);
-    when(fromDoToDTO.MapAuto(auto)).thenReturn(autoDTO);
+    when(fromDoToDTO.mapAuto(auto)).thenReturn(autoDTO);
     final AutoDTO expectedAuto = autoService.addAuto(auto);
 
     // Then
@@ -63,7 +63,7 @@ public class AutoServiceImplTest {
 
     // When
     when(autoRepository.save(auto)).thenReturn(auto);
-    when(fromDoToDTO.MapAuto(auto)).thenReturn(autoDTO);
+    when(fromDoToDTO.mapAuto(auto)).thenReturn(autoDTO);
     final AutoDTO expectedAuto = autoService.updateAuto(auto);
 
     // Then
@@ -82,8 +82,8 @@ public class AutoServiceImplTest {
 
     // When
     when(autoRepository.findAll()).thenReturn(autoListMock);
-    when(fromDoToDTO.MapAuto(auto)).thenReturn(autoDTO);
-    when(fromDoToDTO.MapAuto(auto1)).thenReturn(autoDTO1);
+    when(fromDoToDTO.mapAuto(auto)).thenReturn(autoDTO);
+    when(fromDoToDTO.mapAuto(auto1)).thenReturn(autoDTO1);
     final List<AutoDTO> expectedAutoList = autoService.getAllAutos();
 
     // Then
@@ -102,8 +102,8 @@ public class AutoServiceImplTest {
 
     // When
     when(autoRepository.findByRegistrationNumber(keyword)).thenReturn(mockedAutos);
-    when(fromDoToDTO.MapAuto(auto1)).thenReturn(autoDTO1);
-    when(fromDoToDTO.MapAuto(auto2)).thenReturn(autoDTO2);
+    when(fromDoToDTO.mapAuto(auto1)).thenReturn(autoDTO1);
+    when(fromDoToDTO.mapAuto(auto2)).thenReturn(autoDTO2);
     final List<AutoDTO> autos = autoService.searchRegistrationNumber(keyword);
 
     // Then

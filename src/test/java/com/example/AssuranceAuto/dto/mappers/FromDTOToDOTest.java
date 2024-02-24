@@ -28,7 +28,7 @@ public class FromDTOToDOTest {
   public void testMapAssurance() {
     final AssuranceDTO assuranceDTO = new AssuranceDTO("123");
 
-    final Assurance result = fromDTOToDO.MapAssuranceDTO(assuranceDTO);
+    final Assurance result = fromDTOToDO.mapAssuranceDTO(assuranceDTO);
 
     assertEquals("123", result.getAssuranceNumber());
   }
@@ -37,7 +37,7 @@ public class FromDTOToDOTest {
   public void testMapAuto() {
     final AutoDTO auto = new AutoDTO("123", "KIA");
 
-    final Auto result = fromDTOToDO.MapAutoDTO(auto);
+    final Auto result = fromDTOToDO.mapAutoDTO(auto);
 
     assertEquals("KIA", result.getModel());
     assertEquals("123", result.getRegistrationNumber());
