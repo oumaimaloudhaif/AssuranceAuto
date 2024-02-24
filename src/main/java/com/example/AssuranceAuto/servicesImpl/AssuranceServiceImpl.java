@@ -100,6 +100,7 @@ public class AssuranceServiceImpl implements AssuranceService {
     public boolean deleteAssuranceById(Long assuranceId) {
         final Assurance assurance = assuranceRepository.findById(assuranceId).orElse(null);
         if (assurance != null) {
+            assurance.getAutos().forEach(auto -> {auto.setAssurance(null);});
             assuranceRepository.delete(assurance);
 
             return true;
