@@ -60,7 +60,7 @@ public class AutoControllerTest extends AbstractTest {
     assertEquals("registrationNumber", autos.getResult().get(0).getRegistrationNumber());
     assertEquals("model", autos.getResult().get(0).getModel());
     assertEquals("registrationNumber1", autos.getResult().get(1).getRegistrationNumber());
-    assertEquals("mode1l", autos.getResult().get(1).getModel());
+    assertEquals("model1", autos.getResult().get(1).getModel());
   }
 
   @Test
