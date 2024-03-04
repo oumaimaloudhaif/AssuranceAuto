@@ -89,7 +89,7 @@ jobs:
               context: .
               file: Dockerfile
               push: true
-              tags: assuranceauto:latest
+              tags: loudhaif/assuranceauto:latest
 
         # Run the docker image
         - name: Run image in a container
