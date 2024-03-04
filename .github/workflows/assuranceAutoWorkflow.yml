@@ -88,11 +88,11 @@ jobs:
               context: .
               file: Dockerfile
               push: true
-              tags: AssuranceAuto:latest
+              tags: assuranceauto:latest
 
         # Run the docker image
         - name: Run image in a container
           uses: addnab/docker-run-action@v3
           with:
-               image: ${{ secrets.DOCKERHUB_USERNAME }}/AssuranceAuto:latest
+               image: ${{ secrets.DOCKERHUB_USERNAME }}/assuranceauto:latest
                run: echo "Running the latest docker image"
