@@ -8,13 +8,16 @@ import com.example.AssuranceAuto.controllers.responses.AssuranceResponse;
 import com.example.AssuranceAuto.dtos.AssuranceDTO;
 import com.example.AssuranceAuto.entities.Assurance;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AssuranceUseCase extends AbstractTest {
 
   @Autowired private ObjectMapper objectMapper;
@@ -26,6 +29,7 @@ class AssuranceUseCase extends AbstractTest {
   }
 
   @Test
+  @Order(1)
   public void getAllAssurancesTestWhenAssuranceExist() throws Exception {
     // Given
     final String uri = "/assurances";
@@ -44,6 +48,7 @@ class AssuranceUseCase extends AbstractTest {
   }
 
   @Test
+  @Order(2)
   public void getAllAssurancesTestWrongPath() throws Exception {
     // Given
     final String uri = "/assurancess";
@@ -59,27 +64,7 @@ class AssuranceUseCase extends AbstractTest {
   }
 
   @Test
-  public void searchAssuranceTestWhenKeywordIsNull() throws Exception {
-    // Given
-    final String uri = "/assurances";
-
-    // when
-    MvcResult mvcResult =
-        mvc.perform(
-                MockMvcRequestBuilders.get(uri)
-                    .param("keyword", (String) null)
-                    .accept(MediaType.APPLICATION_JSON_VALUE))
-            .andReturn();
-    int status = mvcResult.getResponse().getStatus();
-
-    // then
-    assertEquals(200, status);
-    String content = mvcResult.getResponse().getContentAsString();
-    AssuranceResponse assuranceResponse = super.mapFromJson(content, AssuranceResponse.class);
-    assertEquals(4, assuranceResponse.getResult().size());
-  }
-
-  @Test
+  @Order(3)
   public void fetchAssuranceWithNonNullKeyword() throws Exception {
     // Given
     final String uri = "/assurances";
@@ -104,12 +89,13 @@ class AssuranceUseCase extends AbstractTest {
   }
 
   @Test
+  @Order(4)
   public void addAssuranceTest() throws Exception {
 
     // Given
     final String uri = "/assurances";
     Assurance assurance = new Assurance();
-    assurance.setAssuranceNumber("assuranceNumber");
+    assurance.setAssuranceNumber("assuranceNumber3");
     String inputJson = new ObjectMapper().writeValueAsString(assurance);
 
     // When
@@ -126,16 +112,18 @@ class AssuranceUseCase extends AbstractTest {
     assertEquals(200, status);
     String content = mvcResult.getResponse().getContentAsString();
     AssuranceDTO result = objectMapper.readValue(content, AssuranceDTO.class);
-    assertEquals("assuranceNumber", result.getAssuranceNumber());
+    assertEquals("assuranceNumber3", result.getAssuranceNumber());
   }
 
   @Test
+  @Order(5)
   public void updateAssuranceTest() throws Exception {
     // Given
     final String uri = "/assurances";
 
     Assurance assurance = new Assurance();
-    assurance.setAssuranceNumber("assuranceNumber");
+    assurance.setAssurance_Id(3L);
+    assurance.setAssuranceNumber("assuranceNumber3");
     String inputJson = new ObjectMapper().writeValueAsString(assurance);
 
     // When
@@ -151,13 +139,14 @@ class AssuranceUseCase extends AbstractTest {
     assertEquals(200, status);
     String content = mvcResult.getResponse().getContentAsString();
     AssuranceDTO result = objectMapper.readValue(content, AssuranceDTO.class);
-    assertEquals("assuranceNumber", result.getAssuranceNumber());
+    assertEquals("assuranceNumber3", result.getAssuranceNumber());
   }
 
   @Test
+  @Order(6)
   public void findAssuranceById() throws Exception {
     // Given
-    final String uri = "/assurances/1";
+    final String uri = "/assurances/3";
 
     // When
     MvcResult mvcResult =
@@ -169,10 +158,11 @@ class AssuranceUseCase extends AbstractTest {
     assertEquals(200, status);
     String content = mvcResult.getResponse().getContentAsString();
     AssuranceDTO result = objectMapper.readValue(content, AssuranceDTO.class);
-    assertEquals("Assurance1", result.getAssuranceNumber());
+    assertEquals("assuranceNumber3", result.getAssuranceNumber());
   }
 
   @Test
+  @Order(7)
   public void deleteAssuranceNotExistTest() throws Exception {
     // Given
     String uri = "/assurances/118";
@@ -189,6 +179,7 @@ class AssuranceUseCase extends AbstractTest {
   }
 
   @Test
+  @Order(8)
   public void deleteAssuranceExistTest() throws Exception {
     // Given
     String uri = "/assurances/1";
@@ -202,5 +193,26 @@ class AssuranceUseCase extends AbstractTest {
     String content = mvcResult.getResponse().getContentAsString();
     Boolean actualValue = Boolean.valueOf(content);
     assertEquals(true, actualValue);
+  }
+  @Test
+  @Order(9)
+  public void searchAssuranceTestWhenKeywordIsNull() throws Exception {
+    // Given
+    final String uri = "/assurances";
+
+    // when
+    MvcResult mvcResult =
+            mvc.perform(
+                            MockMvcRequestBuilders.get(uri)
+                                    .param("keyword", (String) null)
+                                    .accept(MediaType.APPLICATION_JSON_VALUE))
+                    .andReturn();
+    int status = mvcResult.getResponse().getStatus();
+
+    // then
+    assertEquals(200, status);
+    String content = mvcResult.getResponse().getContentAsString();
+    AssuranceResponse assuranceResponse = super.mapFromJson(content, AssuranceResponse.class);
+    assertEquals(2, assuranceResponse.getResult().size());
   }
 }

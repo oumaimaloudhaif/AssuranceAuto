@@ -82,21 +82,23 @@ public class AssuranceServiceImplTest {
     when(assuranceRepository.findAll()).thenReturn(assuranceListMock);
     when(fromDoToDTO.mapAssurance(assurance)).thenReturn(assuranceDTO);
     when(fromDoToDTO.mapAssurance(assurance1)).thenReturn(assuranceDTO1);
-    final List<AssuranceDTO> expectedAssuranceList = assuranceService.getAllAssurances();
+    final List<AssuranceDTO> resultAssuranceList = assuranceService.getAllAssurances();
 
     // Then
-    assertEquals(expectedAssuranceList.size(), assuranceListMock.size());
+    assertEquals(assuranceListMock.size(), resultAssuranceList.size());
+    assertEquals("assuranceNumber", resultAssuranceList.get(0).getAssuranceNumber());
+    assertEquals("assuranceNumber1", resultAssuranceList.get(1).getAssuranceNumber());
   }
 
   @Test
   public void testSearchAssurance() {
     // Given
-    final String keyword = "kia";
+    final String keyword = "assuranceNumber";
     final Assurance assurance1 = AssuranceTools.createAssurance(1L, "assuranceNumber");
-    final Assurance assurance2 = AssuranceTools.createAssurance(2L, "assuranceNumber1");
+    final Assurance assurance2 = AssuranceTools.createAssurance(2L, "assuranceNumber");
     final List<Assurance> mockedAssurances = Arrays.asList(assurance1, assurance2);
     final AssuranceDTO assuranceDTO1 = AssuranceDTOTools.createAssuranceDTO("assuranceNumber");
-    final AssuranceDTO assuranceDTO2 = AssuranceDTOTools.createAssuranceDTO("assuranceNumber1");
+    final AssuranceDTO assuranceDTO2 = AssuranceDTOTools.createAssuranceDTO("assuranceNumber");
 
     // When
     when(assuranceRepository.findByAssuranceNumber(keyword)).thenReturn(mockedAssurances);
@@ -107,5 +109,8 @@ public class AssuranceServiceImplTest {
 
     // Then
     assertEquals(assuranceDTOS.size(), mockedAssurances.size());
+    assertEquals("assuranceNumber", mockedAssurances.get(0).getAssuranceNumber());
+    assertEquals(assuranceDTOS.get(0).getAssuranceNumber(), mockedAssurances.get(0).getAssuranceNumber());
+    assertEquals(assuranceDTOS.get(1).getAssuranceNumber(), mockedAssurances.get(1).getAssuranceNumber());
   }
 }

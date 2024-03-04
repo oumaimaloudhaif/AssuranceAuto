@@ -48,11 +48,11 @@ public class AutoServiceImplTest {
     // When
     when(autoRepository.save(auto)).thenReturn(auto);
     when(fromDoToDTO.mapAuto(auto)).thenReturn(autoDTO);
-    final AutoDTO expectedAuto = autoService.addAuto(auto);
+    final AutoDTO resultAuto = autoService.addAuto(auto);
 
     // Then
-    assertEquals(expectedAuto.getRegistrationNumber(), auto.getRegistrationNumber());
-    assertEquals(expectedAuto.getModel(), auto.getModel());
+    assertEquals(autoDTO.getRegistrationNumber(), resultAuto.getRegistrationNumber());
+    assertEquals(autoDTO.getModel(), resultAuto.getModel());
   }
 
   @Test
@@ -64,30 +64,34 @@ public class AutoServiceImplTest {
     // When
     when(autoRepository.save(auto)).thenReturn(auto);
     when(fromDoToDTO.mapAuto(auto)).thenReturn(autoDTO);
-    final AutoDTO expectedAuto = autoService.updateAuto(auto);
+    final AutoDTO resultAuto = autoService.updateAuto(auto);
 
     // Then
-    assertEquals(expectedAuto.getRegistrationNumber(), auto.getRegistrationNumber());
-    assertEquals(expectedAuto.getModel(), auto.getModel());
+    assertEquals(autoDTO.getRegistrationNumber(), resultAuto.getRegistrationNumber());
+    assertEquals(autoDTO.getModel(), resultAuto.getModel());
   }
 
   @Test
   public void getAllAssurancesTest() {
     // Given
     final Auto auto = AutoTools.createAuto(1L, "registrationNumber", "model");
-    final Auto auto1 = AutoTools.createAuto(1L, "registrationNumber", "model");
+    final Auto auto1 = AutoTools.createAuto(1L, "registrationNumber1", "model1");
     final List<Auto> autoListMock = List.of(auto, auto1);
     final AutoDTO autoDTO = AutoDTOTools.createAutoDTO("registrationNumber", "model");
-    final AutoDTO autoDTO1 = AutoDTOTools.createAutoDTO("registrationNumber", "model");
+    final AutoDTO autoDTO1 = AutoDTOTools.createAutoDTO("registrationNumber1", "model1");
 
     // When
     when(autoRepository.findAll()).thenReturn(autoListMock);
     when(fromDoToDTO.mapAuto(auto)).thenReturn(autoDTO);
     when(fromDoToDTO.mapAuto(auto1)).thenReturn(autoDTO1);
-    final List<AutoDTO> expectedAutoList = autoService.getAllAutos();
+    final List<AutoDTO> resultAutoList = autoService.getAllAutos();
 
     // Then
-    assertEquals(expectedAutoList.size(), autoListMock.size());
+    assertEquals(autoListMock.size(), resultAutoList.size());
+    assertEquals("model", resultAutoList.get(0).getModel());
+    assertEquals("registrationNumber", resultAutoList.get(0).getRegistrationNumber());
+    assertEquals("model1", resultAutoList.get(1).getModel());
+    assertEquals("registrationNumber1", resultAutoList.get(1).getRegistrationNumber());
   }
 
   @Test
