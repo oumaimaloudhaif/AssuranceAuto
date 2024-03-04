@@ -81,7 +81,7 @@ jobs:
           with:
               username: ${{ secrets.DOCKERHUB_USERNAME }}
               password: ${{ secrets.DOCKERHUB_TOKEN }}
-
+        # Build and push  the docker image
         - name: Build and push
           uses: docker/build-push-action@v4
           with:
@@ -90,3 +90,9 @@ jobs:
               push: true
               tags: AssuranceAuto:latest
 
+        # Run the docker image
+        - name: Run image in a container
+          uses: addnab/docker-run-action@v3
+          with:
+               image: ${{ secrets.DOCKERHUB_USERNAME }}/AssuranceAuto:latest
+               run: echo "Running the latest docker image"
