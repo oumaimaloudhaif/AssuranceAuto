@@ -42,7 +42,7 @@ public class AutoControllerTest extends AbstractTest {
     // Given
     final String uri = "/autos";
     final AutoDTO autoDTO = new AutoDTO("registrationNumber", "model");
-    final AutoDTO autoDTO1 = new AutoDTO("registrationNumber", "model");
+    final AutoDTO autoDTO1 = new AutoDTO("registrationNumber1", "model1");
     final List<AutoDTO> autoDTOList = List.of(autoDTO, autoDTO1);
 
     // When
@@ -57,6 +57,10 @@ public class AutoControllerTest extends AbstractTest {
     String content = mvcResult.getResponse().getContentAsString();
     AutoResponse autos = super.mapFromJson(content, AutoResponse.class);
     assertEquals(2, autos.getResult().size());
+    assertEquals("registrationNumber", autos.getResult().get(0).getRegistrationNumber());
+    assertEquals("model", autos.getResult().get(0).getModel());
+    assertEquals("registrationNumber1", autos.getResult().get(1).getRegistrationNumber());
+    assertEquals("model1", autos.getResult().get(1).getModel());
   }
 
   @Test
@@ -159,6 +163,8 @@ public class AutoControllerTest extends AbstractTest {
     String content = mvcResult.getResponse().getContentAsString();
     AutoDTO result = objectMapper.readValue(content, AutoDTO.class);
     assertEquals(autoDTO.getRegistrationNumber(), result.getRegistrationNumber());
+    assertEquals(autoDTO.getModel(), result.getModel());
+
   }
 
   @Test
@@ -185,6 +191,7 @@ public class AutoControllerTest extends AbstractTest {
     String content = mvcResult.getResponse().getContentAsString();
     AutoDTO result = objectMapper.readValue(content, AutoDTO.class);
     assertEquals(autoDTO.getRegistrationNumber(), result.getRegistrationNumber());
+    assertEquals(autoDTO.getModel(), result.getModel());
   }
   @Test
   public void getAllAssurancesTestThenThrowInternalException() throws Exception {
