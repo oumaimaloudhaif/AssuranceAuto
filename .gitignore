@@ -38,6 +38,5 @@ build/
 mvnw.cmd
 mvnw
 
-
 ### environment ###
 .env
