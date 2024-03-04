@@ -56,6 +56,8 @@ public class AssuranceControllerTest extends AbstractTest {
     String content = mvcResult.getResponse().getContentAsString();
     AssuranceResponse assurances = super.mapFromJson(content, AssuranceResponse.class);
     assertEquals(2, assurances.getResult().size());
+    assertEquals("assuranceNumber", assurances.getResult().get(0).getAssuranceNumber());
+    assertEquals("assuranceNumber1",  assurances.getResult().get(1).getAssuranceNumber());
   }
 
   @Test
