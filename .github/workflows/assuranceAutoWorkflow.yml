@@ -81,7 +81,8 @@ jobs:
           with:
               username: ${{ secrets.DOCKERHUB_USERNAME }}
               password: ${{ secrets.DOCKERHUB_TOKEN }}
-        # Build and push  the docker image
+
+        # Build and push the docker image
         - name: Build and push
           uses: docker/build-push-action@v4
           with:
