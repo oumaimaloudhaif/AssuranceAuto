@@ -46,7 +46,7 @@ jobs:
       - name: Run tests
         run: mvn --batch-mode --update-snapshots verify
 
-    docker_build:
+  docker_build:
 
       runs-on: ubuntu-latest
 
