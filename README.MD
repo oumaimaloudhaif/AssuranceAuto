@@ -66,4 +66,11 @@ Unit tests are found under : src/test/java/com/example/AssuranceAuto
 
 Integration tests are found under: src/test/java/com/example/AssuranceAuto/UseCase
   - The integration tests focus in the behaviour of end to end interaction.
- 
+
+## Deployment
+
+The AssuranceAuto application deployment is streamlined through the assuranceAutoWorkflow, an automated Continuous Integration (CI) process designed to ensure the seamless integration and rigorous testing of code alterations before deployment. 
+
+Ultimately, this workflow ensures the robustness and reliability of the AssuranceAuto application's deployment process.
+
+- To learn more about the application deployment process, you can refer to the [assuranceAutoWorkflow](/Users/oumaima/Downloads/AssuranceAuto/.github/workflows/assuranceAutoWorkflow.yml) file. This file contains the configuration for the workflow responsible for automating Continuous Integration (CI) processes and deployment for the AssuranceAuto application.
